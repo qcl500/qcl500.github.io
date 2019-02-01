@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<!--
+  Created by qcl500
+  Based on  Material Design Lite templates 
+  Material Design Lite link 'https://getmdl.io'
+
+-->
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Qccccccl500</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="../images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="../images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="../images/favicon.png">
+
+
+
+  <link rel="stylesheet" href="../material.min.css">
+  <script src="../material.min.js"></script>
+  <link rel="stylesheet" href="../icon.css">
+  <link rel="stylesheet" href="styles.css">
+  <style> 
+    #view-back {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 77px;
+      z-index: 900;
+    }
+  </style>
+
+</head>
+
+<body class="mdl-index">
+  <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+
+    <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+    <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+      <h3>Qccccccl500</h3>
+    </div>
+    <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+      <div class="mdl-layout__tab" ></a>
+
+        
+      </div>
+    </div>
+  </header>
+
+
+  <main class="deoo mdl-layout__content">
+    <div class="demo-container mdl-grid">
+      <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--hide-tablet mdl-cell--hide-phone">
+
+
+      </div>
+      <div class="mdl-cell mdl-cell--8-col demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800">
+        <h3>SRCNN超分辨率卷积神经网络笔记</h3>
+        <p>
+          &nbsp;&nbsp;&nbsp;&nbsp;图像超分辨率重建是通过低分辨率图像或图像序列恢复出高分辨率图像。SRCNN作为首个使用卷积神经网络（深度学习CNN结构），只使用三层卷积神经网络就实现端到端的超分辨率，获得较好的图像效果。
+        </p>
+        <h4 class="centerPa">一. SRCNN的基本模型</h4>
+        <p>
+          （1）先将低分辨率图像使用双三次差值放大至目标尺寸（如放大至2倍、3倍、4倍），此时仍然称放大至目标尺寸后的图像为低分辨率图像(Low-resolution image)，即图中的输入(input)<br>
+          （2）将低分辨率图像输入三层卷积神经网络，在原论文中卷积相关设置中，主要对YCrCb颜色空间中的Y通道进行重建，网络形式为(conv1+relu1)—(conv2+relu2)—(conv3+relu3)<br>
+          （3）网络输出即是最终获得重建的高分辨率图像
+        </p>
+        <img src="../images/srcnn模型图.png" alt="srcnn模型图" class="deoo">
+        <p class="centerPa">
+          图1.原文模型图
+        </p>
+        <img src="../images/只训练Y通道.jpg" alt="仅训练Y通道" class="deoa">
+        <p class="centerPa">
+          图2.只训练Y通道的模型图
+        </p>
+        <p style="font-weight:bold">Tensorflow卷积网络设置</p>
+        <p>
+          第一层卷积：卷积核尺寸9×9(f1×f1)，卷积核数目64(n1)，输出64张特征图，步长为1，边框不补充<br>
+          第二层卷积：卷积核尺寸1×1(f2×f2)，卷积核数目32(n2)，输出32张特征图，步长为1，边框不补充<br>
+          第三层卷积：卷积核尺寸5×5(f3×f3)，卷积核数目1(n3)，输出1张特征图，步长为1，边框不补充<br>
+        </p>
+        <img src="../images/模型图a.jpg" alt="tensorflow模型图" class="deoa">
+        <p class="centerPa">
+          图3.Tensorflow CNN卷积网络模型图
+        </p>
+        <h4 class="centerPa">二. 损失与优化</h4>
+        <p>损失器采用MSE最小平方差损失函数</p>
+        <img src="../images/损失函数.png" alt="损失函数" class="">
+        <p>优化采用梯度下降法AdamOptimizer，学习率learning rate=0.001</p>
+        <h4 class="centerPa">三. 实现过程</h4>
+        <h6>A.&nbsp;&nbsp;编写Tensorflow模型图</h6>
+        <p>同图3，略......</p>
+        <h6>B.&nbsp;&nbsp;制作训练数据集</h6>
+        <p>
+            1.将原始图片分辨率压缩成原来的1/3倍，再双立方插值成原始分辨率，作为训练图片<br>
+            2.将要训练图片和目标图片分割成一定的patch<br>
+            3.原始图片与训练图片均只提取Y通道<br>
+            4.存入h5py的数据集中<br>
+
+        </p>
+        <h6>C.&nbsp;&nbsp;训练</h6>
+        <p>
+          1.读取数据集<br>
+          2.分块batch<br>
+          3.运行tensorflow模型<br>
+          4.模型的保存<br>
+
+        </p>
+        <h6>D.&nbsp;&nbsp;预测</h6>
+        <p>
+            1.将预测的图片双立方插值至目标分辨率<br>
+            2.将预测的图片分割成固定大小的patch<br>
+            3.导入tensorflow模型<br>
+            4.输出值异端检测*<br>
+            5.预测后的patch序列重新转换回图片<br>
+
+            <br>
+            Ps：使用Tensorflow进行复现时，图像预处理时将像素点取值归一化至[0,1]，预测时，得到的最后一层特征图即重建结果直接乘以255再使用uint8转换时为0-255取值时会出现小问题，因此在乘以255前，须将负值设置为0，大于255的设置为255，再转换成uint8
+        </p>
+        <img src="../images/srcnn流程.jpg" alt="srcnn流程图" class="deo60">
+
+        <h4 class="centerPa">四. 变种</h4>
+        <h6>变种一:训练RGB三通道</h6>
+        <img src="../images/变种1.jpg" alt="变种1" class="deoa">
+        <h6>变种二:NO patch or HAVE patch</h6>
+        <p>训练依旧采用分割patch处理<br>
+           预测采用No patch 
+        </p>
+        <h6>变种三:VALID or SAME</h6>
+        <p>卷积层的padding选值问题</p>
+
+        <h4 class="centerPa">参考文献</h4>
+
+        <p>
+          [0]&nbsp;源代码; &nbsp; <a href="" target="_blank">xxx</a><br>
+          [1]&nbsp;Image Super-Resolution Using Deep Convolutional Networks; &nbsp; <a href="http://mmlab.ie.cuhk.edu.hk/projects/SRCNN.html" target="_blank">http://mmlab.ie.cuhk.edu.hk/projects/SRCNN.html</a><br>
+          [2]&nbsp;基于深度卷积神经网络的图像超分辨率重建(SRCNN)学习笔记;&nbsp; <a href="https://blog.csdn.net/loadqian/article/details/80626438" target="_blank">https://blog.csdn.net/loadqian/article/details/80626438</a><br>
+        </p>
+
+      </div>
+    </div>
+    <footer class="mdl-mini-footer">
+      <div class="mdl-mini-footer__right-section">
+        <ul class="mdl-mini-footer__link-list">
+          <div class="mdl-logo mdl-cell--hide-phone mdl-cell--hide-tablet">FAQ</div>
+          <li><a href="https://github.com/qcl500/qcl500.github.io">Questions</a></li>
+          <li><a href="https://github.com/qcl500/qcl500.github.io/issues">Contact us</a></li>
+        </ul>
+      </div>
+    </footer>
+  </main>
+
+  <a href="#"  id="view-back" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast mdl-cell--hide-phone"><i class="material-icons">arrow_upward</i></a>
+</body>
+</html>

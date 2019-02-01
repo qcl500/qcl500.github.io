@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+  Created by qcl500
+  Based on  Material Design Lite templates 
+  Material Design Lite link 'https://getmdl.io'
+
+-->
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Qccccccl500</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="../images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="../images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="../images/favicon.png">
+
+
+
+  <link rel="stylesheet" href="../material.min.css">
+  <script src="../material.min.js"></script>
+  <link rel="stylesheet" href="../icon.css">
+  <link rel="stylesheet" href="styles.css">
+  <style> 
+    #view-back {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 77px;
+      z-index: 900;
+    }
+  </style>
+
+</head>
+
+<body class="mdl-index">
+  <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+
+    <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+    <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+      <h3>Qccccccl500</h3>
+    </div>
+    <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+      <div class="mdl-layout__tab is-active" ></div>
+    </div>
+  </header>
+
+
+  <main class="deoo mdl-layout__content">
+    <div class="demo-container mdl-grid">
+      <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--hide-tablet mdl-cell--hide-phone">
+
+
+      </div>
+      <div class="mdl-cell mdl-cell--8-col demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800">
+        <h3>目标检测: YOLOv3笔记(简略)</h3>
+        
+        <h6>&nbsp;&nbsp;YOLOv3在v2的基础上进行多处修改，下面仅给出更改点，其它请参照<a href="0002.html">YOLOv2</a>的笔记</h6>
+        <p>
+          1.扩展卷积模型深度，融合resnet基础分类网络以及多尺度预测(FPN)，共有三个尺度<br>
+          2.锚箱数量变更，v3的每个尺度各有3个锚箱，共9个<br>
+          3.误差计算采用交叉熵<br>
+          4.分类采用sigmoid曲线<br>
+        </p>
+        <h4 class="centerPa">一. YOLOv3基础模型—Darknet52</h4>
+        <img src="../images/yolo3结构图.jpg" alt="yolo3结构图.jpg" class="deoa">
+        <p class="centerPa">*引用自[3]</p>
+        <h4 class="centerPa">二. YOLOv3的损失计算</h4>
+        
+        <img src="../images/loss_image/yolov3_loss.jpg" alt="yolov3_loss" class="deoa">
+        <img src="../images/loss_image/yolov3_celoss.png" alt="yolov3_celoss" class="deoa">
+
+
+        <h4 class="centerPa">三. 实现过程</h4>
+        <img src="../images/yolov3实现流程图.jpg" alt="yolov3实现流程图.jpg" class="deoo">
+
+        <h4 class="centerPa">参考文献</h4>
+        <p>
+          [0]&nbsp;源代码; &nbsp; <a href="https://github.com/qqwweee/keras-yolo3" target="_blank">同keras-yolo3</a><br>
+          [1]&nbsp;keras-yolo3; &nbsp; <a href="https://github.com/qqwweee/keras-yolo3" target="_blank">https://github.com/qqwweee/keras-yolo3</a><br>
+          [2]&nbsp;YOLO: Real-Time Object Detection; &nbsp; <a href="https://pjreddie.com/darknet/yolo/" target="_blank">https://pjreddie.com/darknet/yolo/</a><br>
+          [3]&nbsp;目标检测：YOLOv3: 训练自己的数据; &nbsp; <a href="https://blog.csdn.net/lilai619/article/details/79695109" target="_blank">https://blog.csdn.net/lilai619/article/details/79695109</a><br>
+          [4]&nbsp;YOLO v3网络结构分析; &nbsp; <a href="https://blog.csdn.net/qq_37541097/article/details/81214953" target="_blank">https://blog.csdn.net/qq_37541097/article/details/81214953</a><br>
+          [5]&nbsp;笔记五——YOLOv3 tensorflow 实现; &nbsp; <a href="https://blog.csdn.net/IronMastiff/article/details/79940118?utm_source=blogxgwz16" target="_blank">https://blog.csdn.net/IronMastiff/article/details/79940118?utm_source=blogxgwz16</a><br>
+
+        </p>
+
+
+      </div>
+    </div>
+    <footer class="mdl-mini-footer">
+      <div class="mdl-mini-footer__right-section">
+        <ul class="mdl-mini-footer__link-list">
+          <div class="mdl-logo mdl-cell--hide-phone mdl-cell--hide-tablet">FAQ</div>
+          <li><a href="https://github.com/qcl500/qcl500.github.io">Questions</a></li>
+          <li><a href="https://github.com/qcl500/qcl500.github.io/issues">Contact us</a></li>
+        </ul>
+      </div>
+    </footer>
+  </main>
+
+  <a href="#"  id="view-back" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast mdl-cell--hide-phone"><i class="material-icons">arrow_upward</i></a>
+</body>
+</html>

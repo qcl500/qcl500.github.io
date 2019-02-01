@@ -1,0 +1,52 @@
+    .deoo {
+      width: 100%;
+    }
+    .demo-container {
+      max-width: 1600px;
+      width: calc(100% - 16px);
+      margin: 0 auto;
+    }
+    .centerdiv {
+      margin: 0 auto;
+    }
+    .centerPa{ text-align:center} 
+    .rightPa{ text-align:right}
+    .colorPa{ color: #646464}
+    .mdl-card_expand--wide{ width: auto }
+
+    .mdl-card_expand--pictureA{
+      background: url('004.jpg') center / cover;}
+    .mdl-card_expand--pictureB{
+      background: url('002.jpg') center / cover;}
+    .mdl-card_expand--pictureC{
+      background: url('003.jpg') center / cover;}
+    .mdl-card_expand--pictureD{
+      background: url('001.jpg') center / cover;} 
+    .mdl-card_expand--pictureE{
+      background: url('005.jpg') center / cover;} 
+
+    .black-height-6px{ height: 12px }
+    .mdl-index main > .mdl-layout__tab-panel {
+      padding: 8px;
+      padding-top: 24px;
+    }
+    .mdl-index .mdl-layout__tab-bar-button {
+      display: none;
+    }
+    .mdl-index .mdl-layout__tab-bar .mdl-layout__tab.is-active::after {
+      background-color: white;
+      height: 4px;
+    }
+    .mdl-index .mdl-layout__tab-bar {
+      padding: 0 0 0 20%;
+      margin:0 auto;
+      box-sizing: border-box;
+      height: 100%;
+      width: 100%;
+    }
+    .mdl-index main > .mdl-layout__tab-panel .mdl-expand-left {background: #fff}
+    .mdl-index main > .mdl-layout__tab-panel .mdl-expand-right {background: #fff}
+    .mdl-index main > .mdl-layout__tab-panel .mdl-card__title {
+      color: #fff;
+      height: 368px;
+    }

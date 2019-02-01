@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<!--
+  Created by qcl500
+  Based on  Material Design Lite templates 
+  Material Design Lite link 'https://getmdl.io'
+
+-->
+<html lang="zh-cn">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Qccccccl500</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="../images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="../images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="../images/favicon.png">
+
+
+
+  <link rel="stylesheet" href="../material.min.css">
+  <script src="../materialmin.js"></script>
+  <link rel="stylesheet" href="../icon.css">
+  <link rel="stylesheet" href="styles.css">
+  <style> 
+    #view-back {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 77px;
+      z-index: 900;
+    }
+  </style>
+
+</head>
+
+<body class="mdl-index">
+  <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+
+    <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+    <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+      <h3>Qccccccl500</h3>
+    </div>
+    <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+      <div class="mdl-layout__tab is-active" ></div>
+    </div>
+  </header>
+
+
+  <main class="deoo mdl-layout__content">
+    <div class="demo-container mdl-grid">
+      <div class="mdl-cell mdl-cell--2-col-desktop mdl-cell--hide-tablet mdl-cell--hide-phone">
+
+
+      </div>
+      <div class="mdl-cell mdl-cell--8-col demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800">
+        <h3>目标检测: YOLOv2笔记</h3>
+        <h4 class="centerPa">一. YOLOv2基础模型—Darknet19</h4>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;
+          Darknet-19主要参考VGG16模型，主要采用3*3卷积，以及2*2的最大池化层，在特征图维度的降低一倍的同时增加一倍特征图的通道数。另外引入NIN（Network in Network）思想，添加1x1卷积层，另外使用batch_norm正则层加快收敛速度，减少过拟合程度。添加跨层跳跃连接（借鉴ResNet等思想），融合粗细粒度的特征。
+        </p>
+        <img src="../images/darknet19.png" alt="darknet19" class="deoa">
+        <p class="centerPa">图1.darknet-19模型图</p>
+        <p>共包含22个卷积模块、5个最大池化层、1个拼接层以及1个Reorg层,其中卷积模块conv为conv+BN+Leaky，卷积核只使用3x3和1x1</p>
+        <h6>A.卷积模块(conv)</h6>
+        <img src="../images/卷积模块.jpg" alt="卷积模块" class="deoa">
+        <p class="centerPa">图2.卷积模块模型图</p>
+        <h6>B.最大池化(max)</h6>
+        <img src="../images/最大池化.jpg" alt="最大池化层" class="deoa">
+        <p class="centerPa">图3.最大池化原理图</p>
+        <h6>C.拼接层(route)</h6>
+        <img src="../images/拼接层.jpg" alt="拼接层" class="deo60">
+        <p class="centerPa">图4.拼接原理图</p>
+        <h6>D.reorg层</h6>
+        <img src="../images/reorg2.jpg" alt="reorg层" class="deoa">
+        <p class="centerPa">图6.reorg原理图</p>
+        <h6>E.Darknet-19卷积网络输出(output)</h6>
+        <p>网络输出结果的理解：13*13*(5*25)长方体特征图</p>
+        <img src="../images/13-13-(5-25)长方体a.jpg" alt="长方体特征图" class="deoa">
+        <p class="centerPa">图7.输出长方体特征图</p>
+        <h4 class="centerPa">二. YOLOv2的损失与优化</h4>
+        <h6>A.损失器</h6>
+        <p>首先是损失器一图流，看似很复杂，憋急，一步步分析，损失器一共包括三个部分，分类的损失(class_loss)、位置参数的损失(coordinates_loss)以及置信度损失(confidence_loss)</p>
+
+
+        <img src="../images/loss_image/all_in_one.png" alt="loss" class="deoa">
+        <p class="centerPa">图8.损失公式</p>
+        <p style="font-weight: bold">1.分类的损失计算</p>
+        <img src="../images/loss_image/class_loss.png" alt="class_loss" class="deoa">
+
+        <p>
+          scale_class为分类损失调节系数<br>
+          Detectors为判别器A：<br>
+          判断真实object是否在这一网格（i, j）的boxes(k)中，假如存在真实object，则值取1，不存在则取0<br>
+          class_true为类别真实值的One_hot化编码<br>
+          class_pre卷积网络输出的值，经过softmax转换后参加损失器计算<br>
+        </p>
+        <p style="font-weight: bold">2.位置参数的损失计算</p>
+        <img src="../images/loss_image/coordinates_loss.png" alt="coordinates_loss.png" class="deoa">
+
+        <p>
+          scale_codi为位置损失调节系数<br>
+          Detectors为判别器A：<br>
+          判断真实object是否在这一网格（i, j）的boxes(k)中，假如存在真实object，则值取1，不存在则取0<br>
+          codi_true和codi_pre分别为位置(x,y,w,h)的真实值和卷积网络输出值，两者又分为(x,y)和(w,h)两组，计算略有差别。
+        </p>
+        <img src="../images/loss_image/位置参数codi图.jpg" alt="位置参数codi图.jpg" class="deo40">
+
+        <p style="font-weight: bold">&nbsp;&nbsp;I.&nbsp;xy系列(以x坐标举例)</p>
+        <img src="../images/loss_image/x_true2.png" alt="x_true.png" class="deoa">
+        <p>x_pre为卷积网络输出x值，经由sigmoid转换至成[0, 1]</p>
+        <img src="../images/loss_image/x_true1.png" alt="x_true1.png" class="deoa">
+        <p>
+          x_true为相对所在网格的坐标<br>
+          x_ori为相对整张图片(416*416)的坐标<br>
+          x_sit为网格所在编号<br>
+        </p>
+        <p style="font-weight: bold">&nbsp;&nbsp;II.&nbsp;wh系列(以w坐标举例)</p>
+        <img src="../images/loss_image/w_true2.png" alt="w_true.png" class="deoa">
+        <img src="../images/loss_image/w_true1.png" alt="w_true1.png" class="deoa">
+        <p>
+          w_true为相对锚箱宽度的对数<br>
+          w_ori为相对整张图片(416*416)的宽度<br>
+          anchor_w为锚箱的宽度比例<br>
+        </p>
+        <p style="font-weight: bold">3.置信度的损失计算</p>
+        <img src="../images/loss_image/confidence_loss.png" alt="confidence_loss.png" class="deoa">
+        <p>自信度损失计算包括两部分，包含物体所在box的损失，以及不包含物体所在box的损失</p>
+        <p style="font-weight: bold">&nbsp;&nbsp;I.&nbsp;Object_loss</p>
+        <img src="../images/loss_image/object_loss.png" alt="object_loss.png" class="deoa">
+        <p>
+          scale_yes为包含物体的损失调节系数<br>
+          Detectors为判别器A：<br>
+          判断真实object是否在这一网格（i, j）的boxes(k)中，假如存在真实object，则值取1，不存在则取0<br>
+          置信度C_pre取值范围为[0,1]，所以要对卷积网络输出值进行sigmoid转换<br>
+          假如物体在这一网格，这一box中，则真实置信度C=1<br>
+          假如物体不在这一网格，这一box中，则真实置信度C=0<br>
+        </p>
+        <p style="font-weight: bold">&nbsp;&nbsp;II.&nbsp;No_object_loss</p>
+        <img src="../images/loss_image/no_object_loss.png" alt="no_object_loss.png" class="deoa">
+        <p>
+          scale_yes为不包含物体的损失调节系数<br>
+          Detectors为判别器A：<br>
+          判断真实object是否在这一网格（i, j）的boxes(k)中，假如存在真实object，则值取1，不存在则取0<br>
+          Object_detection为判别器B：<br>
+          判断真实object位置(x,y,w,h)与预测object位置(x,y,w,h)之间的交并比是否到达阈值
+          假如交并比(IoU)大于阈值则判别器取1，小于阈值则判别器取0<br>
+          置信度C_pre取值范围为[0,1]，所以要对卷积网络输出值进行sigmoid转换<br>
+          假如物体在这一网格，这一box中，则真实置信度C=1<br>
+          假如物体不在这一网格，这一box中，则真实置信度C=0<br>
+        </p>
+        <h6>B.优化</h6>
+        <p>
+          Adam:(adaptive moment estimation)自适应矩估计下降算法<br>
+          batch_size=8 or 32<br>
+          learning_rate=0.1<br>
+        </p>
+
+        <h4 class="centerPa">三. 实现过程</h4>
+        <h6>A.编写Darknet-19模型</h6>
+        <img src="../images/darknet19.jpg" alt="darknet19.jpg" class="deo60">
+
+        <h6>B.Loss的实现</h6>
+          <p>
+            Yolo的损失器并不是简单MSE，而是由几个不同部分损失拼接起来，因此将其写成一个tensor层更为方便。<br>
+          </p>
+          <img src="../images/loss_yolo.jpg" alt="loss_yolo.jpg" class="deoa">
+          <p>
+            Loss层输入参数：<br>
+            →Darknet-19网络输出的结果13*13*(5*25)长方体 [pre]<br>
+            →图片中M个真实目标参数表M*5（导入计算IoU）[true]<br>
+            →Detectors判别器 13*13*5*1 [true]<br>
+            →结构化的真实目标参数表 13*13*5*5 [true]<br>
+            →锚箱盒 5*2 （5组锚箱）<br>
+            →分类数目N<br>
+          </p>
+          <p>
+            KERAS下实现技巧:
+          </p>
+          <div class="core-color">
+            <code>
+              model = Model([model_body.input, y_true], model_loss)<br>
+              model.compile(optimizer='adam', loss={'yolo_loss': lambda y_true, y_pred: y_pred})
+            </code>
+          </div>
+          <p>
+            <br>将目标当成一个输入，构成多输入模型，把loss写成一个层，作为最后的输出，搭建模型的时候，就只需要将模型的output定义为loss，而compile的时候，直接将loss设置为y_pred（因为模型的输出就是loss，所以y_pred就是loss）
+          </p>
+        <h6>C.训练</h6>
+          <p>1.图片预处理<br>
+            2.Box预处理<br>
+            3.运行带loss层的模型<br>
+            4.模型保存<br>
+            
+          </p>
+
+
+        <h6>D.预测</h6>
+          <p>1.图片预处理<br>
+            2.运行Darknet19基础模型<br>
+            3.输出结果解析转换<br>
+            4.非最大化抑制<br>
+            5.数据输出<br>
+            
+          </p>
+        <img src="../images/实现过程图.jpg" alt="实现过程图.jpg" class="deoo">
+        
+
+        <h4 class="centerPa">参考文献</h4>
+        <p>
+          [0]&nbsp;源代码; &nbsp; <a href="https://github.com/allanzelener/YAD2K" target="_blank">同YAD2K</a><br>
+          [1]&nbsp;YAD2K: Yet Another Darknet 2 Keras; &nbsp;<a href="https://github.com/allanzelener/YAD2K" target="_blank">https://github.com/allanzelener/YAD2K</a><br>
+          [2]&nbsp;YOLO9000: Better, Faster, Stronger; &nbsp; <a href="https://arxiv.org/abs/1612.08242" target="_blank">https://arxiv.org/abs/1612.08242</a><br>
+          [3]&nbsp;YOLO: Real-Time Object Detection; &nbsp; <a href="https://pjreddie.com/darknet/yolov2/" target="_blank">https://pjreddie.com/darknet/yolov2/</a><br>
+          [4]&nbsp;目标检测之YOLOv2，最详细的代码解析; &nbsp; <a href="https://www.jianshu.com/p/032b1eecb335" target="_blank">https://www.jianshu.com/p/032b1eecb335</a><br>
+          [5]&nbsp;深入理解目标检测与YOLO(从v1到v3); &nbsp; <a href="https://blog.csdn.net/qq_39521554/article/details/80694512" target="_blank">https://blog.csdn.net/qq_39521554/article/details/80694512</a><br>
+          
+        </p>
+
+      </div>
+    </div>
+    <footer class="mdl-mini-footer">
+      <div class="mdl-mini-footer__right-section">
+        <ul class="mdl-mini-footer__link-list">
+          <div class="mdl-logo mdl-cell--hide-phone mdl-cell--hide-tablet">FAQ</div>
+          <li><a href="https://github.com/qcl500/qcl500.github.io">Questions</a></li>
+          <li><a href="https://github.com/qcl500/qcl500.github.io/issues">Contact us</a></li>
+        </ul>
+      </div>
+    </footer>
+  </main>
+
+  <a href="#"  id="view-back" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast mdl-cell--hide-phone"><i class="material-icons">arrow_upward</i></a>
+</body>
+</html>
