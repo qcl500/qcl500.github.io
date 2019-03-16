@@ -76,7 +76,7 @@
         <p>&nbsp;&nbsp;&nbsp;&nbsp;
           Darknet-19主要参考VGG16模型，主要采用3*3卷积，以及2*2的最大池化层，在特征图维度的降低一倍的同时增加一倍特征图的通道数。另外引入NIN（Network in Network）思想，添加1x1卷积层，另外使用batch_norm正则层加快收敛速度，减少过拟合程度。添加跨层跳跃连接（借鉴ResNet等思想），融合粗细粒度的特征。
         </p>
-        <img src="../images/darknet19.jpg" alt="darknet19" class="deoa">
+        <img src="../images/darknet19.png" alt="darknet19" class="deoa">
         <p class="centerPa">图1.darknet-19模型图</p>
         <p>共包含22个卷积模块、5个最大池化层、1个拼接层以及1个Reorg层,其中卷积模块conv为conv+BN+Leaky，卷积核只使用3x3和1x1</p>
         <h6>A.卷积模块(conv)</h6>
